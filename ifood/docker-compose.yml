@@ -1,0 +1,12 @@
+version: '3.7'
+
+services:
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_PASSWORD: "ifood"
+      MYSQL_USER: "ifood"
+      MYSQL_DATABASE: "ifood"
+      MYSQL_ROOT_PASSWORD: "ifood"
+    ports:
+      - "3306:3306"
