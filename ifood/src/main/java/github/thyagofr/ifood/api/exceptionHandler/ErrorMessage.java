@@ -1,7 +1,7 @@
 package github.thyagofr.ifood.api.exceptionHandler;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -23,7 +23,7 @@ public class ErrorMessage implements Serializable{
 
     private String message;
 
-    private LocalDateTime timeStamp;
+    private OffsetDateTime timeStamp;
 
     private List<Field> fields;
 

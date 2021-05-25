@@ -2,7 +2,7 @@ package github.thyagofr.ifood.domain.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -46,8 +46,8 @@ public class DeliveryEntity implements Serializable{
     @Enumerated(EnumType.STRING)
     private DeliveryStatus status;
 
-    private LocalDateTime dateOrder;
+    private OffsetDateTime dateOrder;
 
-    private LocalDateTime dateCompletion;
+    private OffsetDateTime dateCompletion;
     
 }

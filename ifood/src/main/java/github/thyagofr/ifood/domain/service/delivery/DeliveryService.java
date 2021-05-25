@@ -1,6 +1,6 @@
 package github.thyagofr.ifood.domain.service.delivery;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 import org.springframework.stereotype.Service;
 
@@ -24,7 +24,7 @@ public class DeliveryService implements IDeliveryService{
         Long clientID = delivery.getClient().getId();
         ClientEntity client = this.clientService.findByID(clientID);
         delivery.setClient(client);
-        delivery.setDateOrder(LocalDateTime.now());
+        delivery.setDateOrder(OffsetDateTime.now());
         delivery.setStatus(DeliveryStatus.PENDING);
         return this.deliveryRepository.save(delivery);
     }

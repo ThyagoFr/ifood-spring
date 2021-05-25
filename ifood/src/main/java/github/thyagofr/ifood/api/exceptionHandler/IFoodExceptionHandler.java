@@ -1,6 +1,7 @@
 package github.thyagofr.ifood.api.exceptionHandler;
 
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,7 +69,7 @@ public class IFoodExceptionHandler {
         ErrorMessage errorMessage = new ErrorMessage();
         errorMessage.setMessage(message);
         errorMessage.setPath(getPath(request));
-        errorMessage.setTimeStamp(LocalDateTime.now());
+        errorMessage.setTimeStamp(OffsetDateTime.now());
         errorMessage.setFields(fieldsWithError);
         return new ResponseEntity<>(errorMessage, status);
     }
