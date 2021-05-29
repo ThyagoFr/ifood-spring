@@ -1,7 +1,7 @@
 package github.thyagofr.ifood.domain.service.client;
 
-import github.thyagofr.ifood.common.PaginationResponse;
 import github.thyagofr.ifood.domain.entity.ClientEntity;
+import github.thyagofr.ifood.domain.entity.Pagination;
 
 public interface IClientService {
 
@@ -9,7 +9,7 @@ public interface IClientService {
 
     ClientEntity update(Long id, ClientEntity client);
 
-    PaginationResponse findAll(Integer page, Integer pageSize);
+    Pagination findAll(Integer page, Integer pageSize);
 
     ClientEntity findByID(Long id);
 

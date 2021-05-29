@@ -1,9 +1,9 @@
 package github.thyagofr.ifood.domain.repository;
 
-import java.util.Optional;
-
-import github.thyagofr.ifood.common.PaginationResponse;
 import github.thyagofr.ifood.domain.entity.ClientEntity;
+import github.thyagofr.ifood.domain.entity.Pagination;
+
+import java.util.Optional;
 
 public interface IClientRepository{
 
@@ -15,6 +15,6 @@ public interface IClientRepository{
 
     ClientEntity save(ClientEntity client);
 
-    PaginationResponse findAll(Integer page, Integer pageSize);
+    Pagination findAll(Integer page, Integer pageSize);
     
 }

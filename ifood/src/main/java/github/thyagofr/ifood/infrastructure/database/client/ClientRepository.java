@@ -1,16 +1,15 @@
 package github.thyagofr.ifood.infrastructure.database.client;
 
-import java.util.Optional;
-
+import github.thyagofr.ifood.domain.entity.ClientEntity;
+import github.thyagofr.ifood.domain.entity.Pagination;
+import github.thyagofr.ifood.domain.repository.IClientRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
-import github.thyagofr.ifood.common.PaginationResponse;
-import github.thyagofr.ifood.domain.entity.ClientEntity;
-import github.thyagofr.ifood.domain.repository.IClientRepository;
-import lombok.AllArgsConstructor;
+import java.util.Optional;
 
 @Component
 @AllArgsConstructor
@@ -40,15 +39,15 @@ public class ClientRepository implements IClientRepository{
     }
 
     @Override
-    public PaginationResponse findAll(Integer page, Integer pageSize) {
+    public Pagination findAll(Integer page, Integer pageSize) {
         Pageable request = PageRequest.of(page, pageSize);
-        Page<ClientEntity> dbPage = this.clientRepository.findAll(request);
-        PaginationResponse response = new PaginationResponse();
-        dbPage.getContent().forEach(c -> response.getElements().add(c));
+        Page<ClientEntity> dbResult = this.clientRepository.findAll(request);
+        Pagination response = new Pagination();
+        dbResult.getContent().forEach(e -> response.getElements().add(e));
         response.setPage(page);
-        response.setPageSize(pageSize);
-        response.setTotalPages(dbPage.getTotalPages());
-        response.setTotalElements(dbPage.getTotalElements());
+        response.setPageSize(response.getElements().size());
+        response.setTotalPages(dbResult.getTotalPages());
+        response.setTotalElements(dbResult.getTotalElements());
         return response;
     }
     

@@ -1,9 +1,9 @@
 package github.thyagofr.ifood.domain.repository;
 
-import java.util.Optional;
-
-import github.thyagofr.ifood.common.PaginationResponse;
 import github.thyagofr.ifood.domain.entity.DeliveryEntity;
+import github.thyagofr.ifood.domain.entity.Pagination;
+
+import java.util.Optional;
 
 public interface IDeliveryRepository {
 
@@ -13,8 +13,8 @@ public interface IDeliveryRepository {
 
     DeliveryEntity save(DeliveryEntity delivery);
 
-    PaginationResponse findAllByClientID(Integer page, Integer pageSize,Long clientID);
+    Pagination findAllByClientID(Integer page, Integer pageSize,Long clientID);
 
-    PaginationResponse findAll(Integer page, Integer pageSize);
+    Pagination findAll(Integer page, Integer pageSize);
     
 }

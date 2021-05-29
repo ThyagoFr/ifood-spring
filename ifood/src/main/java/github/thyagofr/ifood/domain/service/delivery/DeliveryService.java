@@ -1,15 +1,15 @@
 package github.thyagofr.ifood.domain.service.delivery;
 
-import java.time.OffsetDateTime;
-
-import org.springframework.stereotype.Service;
-
 import github.thyagofr.ifood.domain.entity.ClientEntity;
 import github.thyagofr.ifood.domain.entity.DeliveryEntity;
+import github.thyagofr.ifood.domain.entity.Pagination;
 import github.thyagofr.ifood.domain.enums.DeliveryStatus;
 import github.thyagofr.ifood.domain.service.client.IClientService;
 import github.thyagofr.ifood.infrastructure.database.delivery.DeliveryRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.time.OffsetDateTime;
 
 @Service
 @AllArgsConstructor
@@ -27,6 +27,11 @@ public class DeliveryService implements IDeliveryService{
         delivery.setDateOrder(OffsetDateTime.now());
         delivery.setStatus(DeliveryStatus.PENDING);
         return this.deliveryRepository.save(delivery);
+    }
+
+    @Override
+    public Pagination findAll(Integer page, Integer pageSize) {
+        return this.deliveryRepository.findAll(page, pageSize);
     }
     
 }

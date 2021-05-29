@@ -1,7 +1,11 @@
 package github.thyagofr.ifood.domain.service;
 
-import java.util.Optional;
-
+import github.thyagofr.ifood.domain.entity.ClientEntity;
+import github.thyagofr.ifood.domain.exceptions.ConflictException;
+import github.thyagofr.ifood.domain.exceptions.NotFoundException;
+import github.thyagofr.ifood.domain.repository.IClientRepository;
+import github.thyagofr.ifood.domain.service.client.ClientService;
+import github.thyagofr.ifood.domain.service.client.IClientService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,12 +14,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import github.thyagofr.ifood.domain.entity.ClientEntity;
-import github.thyagofr.ifood.domain.exceptions.ConflictException;
-import github.thyagofr.ifood.domain.exceptions.NotFoundException;
-import github.thyagofr.ifood.domain.repository.IClientRepository;
-import github.thyagofr.ifood.domain.service.client.ClientService;
-import github.thyagofr.ifood.domain.service.client.IClientService;
+import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
 public class IClientServiceTest {

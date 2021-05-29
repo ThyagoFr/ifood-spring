@@ -1,16 +1,15 @@
 package github.thyagofr.ifood.domain.service.client;
 
-import java.util.Optional;
-
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import github.thyagofr.ifood.common.PaginationResponse;
 import github.thyagofr.ifood.domain.entity.ClientEntity;
+import github.thyagofr.ifood.domain.entity.Pagination;
 import github.thyagofr.ifood.domain.exceptions.ConflictException;
 import github.thyagofr.ifood.domain.exceptions.NotFoundException;
 import github.thyagofr.ifood.domain.repository.IClientRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -57,7 +56,7 @@ public class ClientService implements IClientService{
     }
 
     @Override
-    public PaginationResponse findAll(Integer page, Integer pageSize) {
+    public Pagination findAll(Integer page, Integer pageSize) {
         return this.clientRepository.findAll(page, pageSize);
     }
     

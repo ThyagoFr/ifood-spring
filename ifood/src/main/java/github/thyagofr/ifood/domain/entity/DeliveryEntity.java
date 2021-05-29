@@ -1,25 +1,14 @@
 package github.thyagofr.ifood.domain.entity;
 
+import github.thyagofr.ifood.domain.enums.DeliveryStatus;
+import lombok.*;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
-
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
-import github.thyagofr.ifood.domain.enums.DeliveryStatus;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "deliveries")
@@ -27,6 +16,7 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @AllArgsConstructor
+@NoArgsConstructor
 public class DeliveryEntity implements Serializable{
 
     @EqualsAndHashCode.Include
@@ -40,6 +30,9 @@ public class DeliveryEntity implements Serializable{
 
     @Embedded
     private Receiver receiver;
+
+    @OneToMany(mappedBy = "delivery")
+    private List<OccurrenceEntity> occurences = new ArrayList<>();
 
     private BigDecimal fee;
 

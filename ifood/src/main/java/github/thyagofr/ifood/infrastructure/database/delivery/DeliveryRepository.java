@@ -1,16 +1,15 @@
 package github.thyagofr.ifood.infrastructure.database.delivery;
 
-import java.util.Optional;
-
+import github.thyagofr.ifood.domain.entity.DeliveryEntity;
+import github.thyagofr.ifood.domain.entity.Pagination;
+import github.thyagofr.ifood.domain.repository.IDeliveryRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
-import github.thyagofr.ifood.common.PaginationResponse;
-import github.thyagofr.ifood.domain.entity.DeliveryEntity;
-import github.thyagofr.ifood.domain.repository.IDeliveryRepository;
-import lombok.AllArgsConstructor;
+import java.util.Optional;
 
 @Component
 @AllArgsConstructor
@@ -34,26 +33,26 @@ public class DeliveryRepository implements IDeliveryRepository {
     }
 
     @Override
-    public PaginationResponse findAllByClientID(Integer page, Integer pageSize, Long clientID) {
+    public Pagination findAllByClientID(Integer page, Integer pageSize, Long clientID) {
         Pageable request = PageRequest.of(page, pageSize);
         Page<DeliveryEntity> dbPage = this.deliveryRepository.findAllByClientId(clientID, request);
-        PaginationResponse response = new PaginationResponse();
+        Pagination response = new Pagination();
         dbPage.getContent().forEach(c -> response.getElements().add(c));
         response.setPage(page);
-        response.setPageSize(pageSize);
+        response.setPageSize(response.getElements().size());
         response.setTotalPages(dbPage.getTotalPages());
         response.setTotalElements(dbPage.getTotalElements());
         return response;
     }
 
     @Override
-    public PaginationResponse findAll(Integer page, Integer pageSize) {
+    public Pagination findAll(Integer page, Integer pageSize) {
         Pageable request = PageRequest.of(page, pageSize);
         Page<DeliveryEntity> dbPage = this.deliveryRepository.findAll(request);
-        PaginationResponse response = new PaginationResponse();
+        Pagination response = new Pagination();
         dbPage.getContent().forEach(c -> response.getElements().add(c));
         response.setPage(page);
-        response.setPageSize(pageSize);
+        response.setPageSize(response.getElements().size());
         response.setTotalPages(dbPage.getTotalPages());
         response.setTotalElements(dbPage.getTotalElements());
         return response;
