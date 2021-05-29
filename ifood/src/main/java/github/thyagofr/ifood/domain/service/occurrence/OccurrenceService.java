@@ -26,6 +26,7 @@ public class OccurrenceService implements IOccurrenceService {
 
   @Override
   public Pagination findAll(Long deliveryID,Integer page, Integer pageSize) {
+    this.deliveryService.findByID(deliveryID);
     return this.occurrenceRepository.findAll(deliveryID,page,pageSize);
   }
 }
