@@ -1,6 +1,7 @@
 package github.thyagofr.ifood.domain.entity;
 
 import github.thyagofr.ifood.domain.enums.DeliveryStatus;
+import github.thyagofr.ifood.domain.exceptions.BadRequestException;
 import lombok.*;
 
 import javax.persistence.*;
@@ -32,7 +33,7 @@ public class DeliveryEntity implements Serializable{
     private Receiver receiver;
 
     @OneToMany(mappedBy = "delivery")
-    private List<OccurrenceEntity> occurences = new ArrayList<>();
+    private List<OccurrenceEntity> occurrences = new ArrayList<>();
 
     private BigDecimal fee;
 
@@ -48,8 +49,20 @@ public class DeliveryEntity implements Serializable{
         occurrence.setDateRegister(OffsetDateTime.now());
         occurrence.setDescription(description);
         occurrence.setDelivery(this);
-        this.getOccurences().add(occurrence);
+        this.getOccurrences().add(occurrence);
         return  occurrence;
+    }
+
+    public void finish() {
+        if (!this.canBeFinished()) {
+            throw new BadRequestException(String.format("entrega com ID %d nao pode ser finalizada", this.getId()));
+        }
+        this.setStatus(DeliveryStatus.FINISHED);
+        this.setDateCompletion(OffsetDateTime.now());
+    }
+
+    private boolean canBeFinished() {
+        return this.getStatus().equals(DeliveryStatus.PENDING);
     }
     
 }

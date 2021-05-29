@@ -33,12 +33,19 @@ public class DeliveryService implements IDeliveryService{
     @Override
     public DeliveryEntity findByID(Long deliveryID) {
         return this.deliveryRepository.findByID(deliveryID)
-                                      .orElseThrow(() -> new NotFoundException(String.format("entrega com ID %s nao encontrada", deliveryID)));
+                                      .orElseThrow(() -> new NotFoundException(String.format("entrega com ID %d nao encontrada", deliveryID)));
     }
 
     @Override
     public Pagination findAll(Integer page, Integer pageSize) {
         return this.deliveryRepository.findAll(page, pageSize);
     }
-    
+
+    @Override
+    public void finish(Long deliveryID) {
+        DeliveryEntity delivery = this.findByID(deliveryID);
+        delivery.finish();
+        this.deliveryRepository.save(delivery);
+    }
+
 }

@@ -36,5 +36,15 @@ public class DeliveryResource {
     ) {
         return this.deliveryService.findAll(page, pageSize);
     }
+
+    @PutMapping(
+        path = "/{id}/finish"
+    )
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    public void finish(
+        @PathVariable("id") Long id
+    ) {
+        this.deliveryService.finish(id);
+    }
     
 }
