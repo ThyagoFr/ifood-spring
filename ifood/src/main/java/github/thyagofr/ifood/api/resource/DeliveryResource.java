@@ -24,7 +24,7 @@ public class DeliveryResource {
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
     public CreatedDeliveryDTO create(@Valid @RequestBody CreateDeliveryDTO dto) {
-        DeliveryEntity entity = this.deliveryService.create(DeliveryAssembler.toEntity(dto));
+        DeliveryEntity entity = this.deliveryService.save(DeliveryAssembler.toEntity(dto));
         return DeliveryAssembler.toDTO(entity);
     }
 

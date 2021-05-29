@@ -5,7 +5,9 @@ import github.thyagofr.ifood.domain.entity.Pagination;
 
 public interface IDeliveryService {
 
-    DeliveryEntity create (DeliveryEntity delivery);
+    DeliveryEntity save (DeliveryEntity delivery);
+
+    DeliveryEntity findByID(Long deliveryID);
 
     Pagination findAll(Integer page, Integer pageSize);
     

@@ -36,6 +36,10 @@ public class DeliveryRepository implements IDeliveryRepository {
     public Pagination findAllByClientID(Integer page, Integer pageSize, Long clientID) {
         Pageable request = PageRequest.of(page, pageSize);
         Page<DeliveryEntity> dbPage = this.deliveryRepository.findAllByClientId(clientID, request);
+        return setPagination(page, dbPage);
+    }
+
+    private Pagination setPagination(Integer page, Page<DeliveryEntity> dbPage) {
         Pagination response = new Pagination();
         dbPage.getContent().forEach(c -> response.getElements().add(c));
         response.setPage(page);
@@ -49,13 +53,7 @@ public class DeliveryRepository implements IDeliveryRepository {
     public Pagination findAll(Integer page, Integer pageSize) {
         Pageable request = PageRequest.of(page, pageSize);
         Page<DeliveryEntity> dbPage = this.deliveryRepository.findAll(request);
-        Pagination response = new Pagination();
-        dbPage.getContent().forEach(c -> response.getElements().add(c));
-        response.setPage(page);
-        response.setPageSize(response.getElements().size());
-        response.setTotalPages(dbPage.getTotalPages());
-        response.setTotalElements(dbPage.getTotalElements());
-        return response;
+        return setPagination(page, dbPage);
     }
     
 }

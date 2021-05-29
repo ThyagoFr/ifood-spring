@@ -42,5 +42,14 @@ public class DeliveryEntity implements Serializable{
     private OffsetDateTime dateOrder;
 
     private OffsetDateTime dateCompletion;
+
+    public OccurrenceEntity addOccurrence(String description) {
+        OccurrenceEntity occurrence = new OccurrenceEntity();
+        occurrence.setDateRegister(OffsetDateTime.now());
+        occurrence.setDescription(description);
+        occurrence.setDelivery(this);
+        this.getOccurences().add(occurrence);
+        return  occurrence;
+    }
     
 }

@@ -4,6 +4,7 @@ import github.thyagofr.ifood.domain.entity.ClientEntity;
 import github.thyagofr.ifood.domain.entity.DeliveryEntity;
 import github.thyagofr.ifood.domain.entity.Pagination;
 import github.thyagofr.ifood.domain.enums.DeliveryStatus;
+import github.thyagofr.ifood.domain.exceptions.NotFoundException;
 import github.thyagofr.ifood.domain.service.client.IClientService;
 import github.thyagofr.ifood.infrastructure.database.delivery.DeliveryRepository;
 import lombok.AllArgsConstructor;
@@ -20,13 +21,19 @@ public class DeliveryService implements IDeliveryService{
     private final IClientService clientService;
 
     @Override
-    public DeliveryEntity create(DeliveryEntity delivery) {
+    public DeliveryEntity save(DeliveryEntity delivery) {
         Long clientID = delivery.getClient().getId();
         ClientEntity client = this.clientService.findByID(clientID);
         delivery.setClient(client);
         delivery.setDateOrder(OffsetDateTime.now());
         delivery.setStatus(DeliveryStatus.PENDING);
         return this.deliveryRepository.save(delivery);
+    }
+
+    @Override
+    public DeliveryEntity findByID(Long deliveryID) {
+        return this.deliveryRepository.findByID(deliveryID)
+                                      .orElseThrow(() -> new NotFoundException(String.format("entrega com ID %s nao encontrada", deliveryID)));
     }
 
     @Override
