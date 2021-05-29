@@ -34,8 +34,7 @@ public class DeliveryResource {
         @RequestParam(defaultValue = "10", name = "pageSize") Integer pageSize, 
         @RequestParam(defaultValue = "0", name = "page") Integer page
     ) {
-        Pagination response = this.deliveryService.findAll(page, pageSize);
-        return response;
+        return this.deliveryService.findAll(page, pageSize);
     }
     
 }

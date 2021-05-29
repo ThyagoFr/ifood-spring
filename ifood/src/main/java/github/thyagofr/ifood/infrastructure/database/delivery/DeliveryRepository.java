@@ -23,20 +23,8 @@ public class DeliveryRepository implements IDeliveryRepository {
     }
 
     @Override
-    public void removeByID(Long ID) {
-        this.deliveryRepository.deleteById(ID);
-    }
-
-    @Override
     public DeliveryEntity save(DeliveryEntity delivery) {
         return this.deliveryRepository.save(delivery);
-    }
-
-    @Override
-    public Pagination findAllByClientID(Integer page, Integer pageSize, Long clientID) {
-        Pageable request = PageRequest.of(page, pageSize);
-        Page<DeliveryEntity> dbPage = this.deliveryRepository.findAllByClientId(clientID, request);
-        return setPagination(page, dbPage);
     }
 
     private Pagination setPagination(Integer page, Page<DeliveryEntity> dbPage) {

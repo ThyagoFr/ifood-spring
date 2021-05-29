@@ -18,7 +18,7 @@ import javax.validation.Valid;
     )
 public class ClientResource {
 
-    private IClientService clientService;
+    private final IClientService clientService;
 
     @GetMapping(produces = "application/json")
     @ResponseStatus(code = HttpStatus.OK)

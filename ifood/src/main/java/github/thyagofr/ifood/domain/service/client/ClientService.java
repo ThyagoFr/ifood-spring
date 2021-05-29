@@ -15,7 +15,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public class ClientService implements IClientService{
 
-    private IClientRepository clientRepository;
+    private final IClientRepository clientRepository;
 
     @Override
     public ClientEntity findByID(Long id) {
@@ -46,7 +46,7 @@ public class ClientService implements IClientService{
         ClientEntity oldClient = this.clientRepository.findByID(id)
                                                       .orElseThrow( () -> new NotFoundException(String.format("cliente com id %d não encontrado", id)));
         Optional<ClientEntity> clientWithSameEmail = this.clientRepository.findByEmail(client.getEmail());
-        if (clientWithSameEmail.isPresent() && clientWithSameEmail.get().getId() != id) {
+        if (clientWithSameEmail.isPresent() && !clientWithSameEmail.get().getId().equals(id)) {
             throw new ConflictException(String.format("email %s ja utilizado", client.getEmail()));
         }
         oldClient.setEmail(client.getEmail());

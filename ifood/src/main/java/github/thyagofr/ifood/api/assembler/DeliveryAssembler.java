@@ -26,6 +26,4 @@ public final class DeliveryAssembler {
         dto.setReceiver(ReceiverAssembler.toDTO(entity.getReceiver()));
         return dto;
     }
-
-
 }
